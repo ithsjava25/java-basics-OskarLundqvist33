@@ -24,6 +24,11 @@ public class Main {
         int StartIndex = -1;
 
 
+        DecimalFormatSymbols symbols = new DecimalFormatSymbols();
+        symbols.setDecimalSeparator(',');
+        DecimalFormat df = new DecimalFormat("0.00", symbols);
+
+
         System.out.println(Arrays.toString(args));
 
         if (args.length == 0 || containsHelp(args))
@@ -201,8 +206,8 @@ public class Main {
 
                     System.out.print("\nBilligaste 2h laddningsfönster:\n");
                     System.out.printf("%02d-%02d och %02d-%02d\n", p1.timeStart().getHour(), p1.timeEnd().getHour(), p2.timeStart().getHour(), p2.timeEnd().getHour());
-                    System.out.printf("Totalt: %.2f öre\n", totalPris);
-                    System.out.printf("Medelpris: %.2f öre\n", meanPris);
+                    System.out.printf("Totalt: %,2f öre\n", totalPris);
+                    System.out.printf("Medelpris: %,2f öre\n", meanPris);
                     System.out.printf("Påbörja laddning: %02d:%02d\n", p1.timeStart().getHour(), p1.timeStart().getMinute());
                 }
             }
@@ -226,8 +231,8 @@ public class Main {
 
                     System.out.print("\nBilligaste 4h laddningsfönster:\n");
                     System.out.printf("%02d-%02d och %02d-%02d\n", p1.timeStart().getHour(), p1.timeEnd().getHour(), p4.timeStart().getHour(), p4.timeEnd().getHour());
-                    System.out.printf("Totalt: %.2f öre\n", totalPris);
-                    System.out.printf("Medelpris: %.2f öre\n", meanPris);
+                    System.out.printf("Totalt: %,2f öre\n", totalPris);
+                    System.out.printf("Medelpris: %,2f öre\n", meanPris);
                     System.out.printf("Påbörja laddning: %02d\n", p1.timeStart().getHour());
                 }
             }
@@ -251,8 +256,8 @@ public class Main {
 
                     System.out.print("\nBilligaste 8h laddningsfönster:\n");
                     System.out.printf("%02d-%02d och %02d-%02d\n", p1.timeStart().getHour(), p1.timeEnd().getHour(), p8.timeStart().getHour(), p8.timeEnd().getHour());
-                    System.out.printf("Totalt: %.2f öre\n", totalPris);
-                    System.out.printf("Medelpris för fönster: %.2f öre\n", meanPris);
+                    System.out.printf("Totalt: %,2f öre\n", totalPris);
+                    System.out.printf("Medelpris för fönster: %,2f öre\n", meanPris);
                     System.out.printf("Påbörja laddning: kl %02d:%02d\n", p1.timeStart().getHour(), p1.timeStart().getMinute());
                 }
             }
