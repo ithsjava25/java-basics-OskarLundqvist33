@@ -175,16 +175,20 @@ public class Main {
         switch (chargingDetect) {
             case "2h" -> {
                 int windowSize = 2;
-                if (priser.size() < windowSize) {
+                if (priser.size() < windowSize)
+                {
                     System.out.println("För få timmar tillgängliga för laddningsfönster.");
                     return;
                 }
-                for (int i = 0; i < priser.size() - windowSize; i++) {
+                for (int i = 0; i < priser.size() - windowSize; i++)
+                {
                     boolean isConsecutive = true;
-                    for (int j = 0; j < windowSize - 1; j++) {
+                    for (int j = 0; j < windowSize - 1; j++)
+                    {
                         var currentEnd = priser.get(i + j).timeEnd();
                         var nextStart = priser.get(i + j + 1).timeStart();
-                        if (!currentEnd.equals(nextStart)) {
+                        if (!currentEnd.equals(nextStart))
+                        {
                             isConsecutive = false;
                             break;
                         }
@@ -193,15 +197,18 @@ public class Main {
                     if (!isConsecutive) continue;
 
                     double summa = 0.0;
-                    for (int j = 0; j < windowSize; j++) {
+                    for (int j = 0; j < windowSize; j++)
+                    {
                         summa += priser.get(i + j).sekPerKWh();
                     }
-                    if (summa < lowestSum) {
+                    if (summa < lowestSum)
+                    {
                         lowestSum = summa;
                         startIndex = i;
                     }
                 }
-                if (startIndex != -1) {
+                if (startIndex != -1)
+                {
                     ElpriserAPI.Elpris p1 = priser.get(startIndex);
                     ElpriserAPI.Elpris p2 = priser.get(startIndex + 1);
 
@@ -219,17 +226,41 @@ public class Main {
                 }
             }
             case "4h" -> {
-                for (int i = 0; i <= priser.size() - 4; i++) {
+                int windowSize = 4;
+                if (priser.size() < windowSize)
+                {
+                    System.out.println("För få timmar tillgängliga för laddningsfönster.");
+                    return;
+                }
+                for (int i = 0; i <= priser.size() - windowSize; i++)
+                {
+                    boolean isConsecutive = true;
+                    for (int j = 0; j < windowSize - 1; j++)
+                    {
+                        var currentEnd = priser.get(i + j).timeEnd();
+                        var nextStart = priser.get(i + j + 1).timeStart();
+                        if (!currentEnd.equals(nextStart))
+                        {
+                            isConsecutive = false;
+                            break;
+                        }
+                    }
+
+                    if (!isConsecutive) continue;
+
                     double summa = 0.0;
-                    for (int j = 0; j < 4; j++) {
+                    for (int j = 0; j < windowSize; j++)
+                    {
                         summa += priser.get(i + j).sekPerKWh();
                     }
-                    if (summa < lowestSum) {
+                    if (summa < lowestSum)
+                    {
                         lowestSum = summa;
                         startIndex = i;
                     }
                 }
-                if (startIndex != -1) {
+                if (startIndex != -1)
+                {
                     ElpriserAPI.Elpris p1 = priser.get(startIndex);
                     ElpriserAPI.Elpris p4 = priser.get(startIndex + 3);
 
@@ -247,17 +278,42 @@ public class Main {
                 }
             }
             case "8h" -> {
-                for (int i = 0; i <= priser.size() - 8; i++) {
+                int windowSize = 8;
+                if (priser.size() < windowSize)
+                {
+                    System.out.println("För få timmar tillgängliga för laddningsfönster.");
+                    return;
+                }
+
+                for (int i = 0; i <= priser.size() - windowSize; i++)
+                {
+                    boolean isConsecutive = true;
+                    for (int j = 0; j < windowSize - 1; j++)
+                    {
+                        var currentEnd = priser.get(i + j).timeEnd();
+                        var nextStart = priser.get(i + j + 1).timeStart();
+                        if (!currentEnd.equals(nextStart))
+                        {
+                            isConsecutive = false;
+                            break;
+                        }
+                    }
+
+                    if (!isConsecutive) continue;
+
                     double summa = 0.0;
-                    for (int j = 0; j < 8; j++) {
+                    for (int j = 0; j < 8; j++)
+                    {
                         summa += priser.get(i + j).sekPerKWh();
                     }
-                    if (summa < lowestSum) {
+                    if (summa < lowestSum)
+                    {
                         lowestSum = summa;
                         startIndex = i;
                     }
                 }
-                if (startIndex != -1) {
+                if (startIndex != -1)
+                {
                     ElpriserAPI.Elpris p1 = priser.get(startIndex);
                     ElpriserAPI.Elpris p8 = priser.get(startIndex + 7);
 
